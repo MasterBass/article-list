@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 const ArticleRow = ({article}) => {
     return (
-        <li>{article.title}</li>
+        <li><Link to={`/article/${article.id}`}>{article.title}</Link></li>
     );
 };
 

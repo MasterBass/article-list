@@ -6,9 +6,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {loadArticlesRequst} from "./actions/articleActions";
+import {loadUsersRequst} from "./actions/userActions";
 
 const store = configureStore();
 store.dispatch(loadArticlesRequst());
+store.dispatch(loadUsersRequst());
+
 
 ReactDOM.render(
     <Provider store={store}>

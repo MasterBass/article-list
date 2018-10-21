@@ -9,12 +9,14 @@ class HomePage extends React.Component {
         return (
             <div>
                 <h1>Home Page</h1>
-                <Link to="about">Go to about page</Link>
-                <ul>
-                    {this.props.articles.map(article =>
-                        <ArticleRow key={article.id} article={article}/>
-                    )}
-                </ul>
+                <Link to="/about">Go to about page</Link>
+                <div className="text">
+                    <ul>
+                        {this.props.articles.map(article =>
+                            <ArticleRow key={article.id} article={article}/>
+                        )}
+                    </ul>
+                </div>
             </div>
         );
     }
