@@ -3,8 +3,8 @@ import articles from './articleReducer';
 import comments from './commentReducer';
 
 const rootReducer = combineReducers({
-   articles,
-   comments
+    articles,
+    comments
 });
 
 export default rootReducer;
