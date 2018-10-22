@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
-export function createCommentSuccess(comment) {
-    return {type: types.CREATE_COMMENT_SUCCESS, comment}
+export function createCommentRequest(comment) {
+    return {type: types.CREATE_COMMENT_REQUEST, comment}
 }
 
 export function loadCommentsRequst(articleId) {

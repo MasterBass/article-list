@@ -7,6 +7,7 @@ function* mySaga() {
     yield takeLatest(types.LOAD_ARTICLES_REQUEST, articleWorkerSaga);
     yield takeLatest(types.LOAD_USERS_REQUEST, userWorkerSaga);
     yield takeLatest(types.LOAD_COMMENTS_REQUEST, commentWorkerSaga);
+    yield takeLatest(types.CREATE_COMMENT_REQUEST, commentCreateWorkerSaga);
 }
 
 function fetchArticles() {
@@ -41,6 +42,11 @@ function* commentWorkerSaga(action) {
         // dispatch a failure action to the store with the error
         yield put({ type: types.LOAD_COMMENTS_FAILURE, error });
     }
+}
+
+function* commentCreateWorkerSaga(action) {
+    const comment = Object.assign({}, action.comment);
+    yield put({type: types.CREATE_COMMENT_SUCCESS, comment });
 }
 
 function* articleWorkerSaga() {

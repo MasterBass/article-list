@@ -5,15 +5,43 @@ import {bindActionCreators} from 'redux';
 import ArticleInfo from './ArticleInfo';
 import UserInfo from './UserInfo';
 import CommentList from './CommentList';
+import AddCommentForm from './AddCommentForm';
 import * as commentActions from '../../actions/commentActions';
 
 
 class ArticlePage extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            newComment: '',
+            commentId: 1000
+        };
+        this.addComment = this.addComment.bind(this);
+        this.updateNewCommentText = this.updateNewCommentText.bind(this);
+    }
 
     componentWillMount() {
         if (this.props.match.params.id > 0) {
             this.props.actions.loadCommentsRequst(this.props.match.params.id);
         }
+    }
+
+    updateNewCommentText(event) {
+        const comment = event.target.value;
+        return this.setState({newComment: comment});
+    }
+
+    addComment(event) {
+        event.preventDefault();
+
+        this.props.actions.createCommentRequest({
+            postId: Number.parseInt(this.props.match.params.id),
+            id: this.state.commentId,
+            body: this.state.newComment,
+            name: "Ivan Pupkin",
+            email: "pupkin.ivan@gmail.com"
+        });
+        this.setState({commentId: this.state.commentId + 1, newComment: ''})
     }
 
     render() {
@@ -24,6 +52,9 @@ class ArticlePage extends React.Component {
                 <ArticleInfo article={this.props.article}/>
                 <UserInfo user={this.props.user}/>
                 <CommentList comments={this.props.comments}/>
+                <AddCommentForm onSave={this.addComment}
+                                onChange={this.updateNewCommentText}
+                                commentText={this.state.newComment} />
             </div>
         );
     }

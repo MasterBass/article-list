@@ -5,7 +5,7 @@ export default function articleReducer(state=initialState.comments, action) {
     switch (action.type) {
         case types.CREATE_COMMENT_SUCCESS:
             return [...state,
-                Object.assign({}, action.comments)
+                Object.assign({}, action.comment)
             ];
 
         case types.LOAD_COMMENTS_SUCCESS:
