@@ -5,7 +5,8 @@ import axios from 'axios';
 
 function* mySaga() {
     yield takeLatest(types.LOAD_ARTICLES_REQUEST, articleWorkerSaga);
-    yield takeLatest(types.LOAD_ARTICLES_REQUEST, userWorkerSaga);
+    yield takeLatest(types.LOAD_USERS_REQUEST, userWorkerSaga);
+    yield takeLatest(types.LOAD_COMMENTS_REQUEST, commentWorkerSaga);
 }
 
 function fetchArticles() {
@@ -20,6 +21,26 @@ function fetchUsers() {
         method: "get",
         url: "https://jsonplaceholder.typicode.com/users"
     });
+}
+
+function fetchComments(action) {
+    return axios({
+       method: "get",
+       url: `https://jsonplaceholder.typicode.com/comments?postId=${action.articleId}`
+    });
+}
+
+function* commentWorkerSaga(action) {
+    try {
+        const response = yield call(fetchComments, action);
+        const comments = response.data;
+        // dispatch a success action to the store with the new dog
+        yield put({ type: types.LOAD_COMMENTS_SUCCESS, comments });
+
+    } catch (error) {
+        // dispatch a failure action to the store with the error
+        yield put({ type: types.LOAD_COMMENTS_FAILURE, error });
+    }
 }
 
 function* articleWorkerSaga() {

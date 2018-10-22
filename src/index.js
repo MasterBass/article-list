@@ -12,7 +12,6 @@ const store = configureStore();
 store.dispatch(loadArticlesRequst());
 store.dispatch(loadUsersRequst());
 
-
 ReactDOM.render(
     <Provider store={store}>
         <App/>
