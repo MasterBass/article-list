@@ -18,13 +18,14 @@ class HomePage extends React.Component {
     }
 
     getFilteredArticles() {
-        if(this.state.searchCondition) {
-            return this.props.articles.filter(artcl =>
-                artcl.title.toLowerCase()
-                    .indexOf(this.state.searchCondition.toLowerCase()) > 0 ||
-                artcl.body.toLowerCase()
-                    .indexOf(this.state.searchCondition.toLowerCase()) > 0
-            );
+        if (this.state.searchCondition) {
+            return this.props.articles
+                .filter(acl =>
+                    acl.title.toLowerCase()
+                        .indexOf(this.state.searchCondition.toLowerCase()) >= 0 ||
+                    acl.body.toLowerCase()
+                        .indexOf(this.state.searchCondition.toLowerCase()) >= 0
+                );
         }
         return this.props.articles;
     }
@@ -54,9 +55,9 @@ class HomePage extends React.Component {
     }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
     return {
-        articles: state.articles
+        articles: state.articles.filter(acl => acl.title)
     }
 }
 

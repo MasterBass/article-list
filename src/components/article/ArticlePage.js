@@ -34,15 +34,16 @@ class ArticlePage extends React.Component {
 
     addComment(event) {
         event.preventDefault();
-
-        this.props.actions.createCommentRequest({
-            postId: Number.parseInt(this.props.match.params.id),
-            id: this.state.commentId,
-            body: this.state.newComment,
-            name: "Ivan Pupkin",
-            email: "pupkin.ivan@gmail.com"
-        });
-        this.setState({commentId: this.state.commentId + 1, newComment: ''})
+        if(this.state.newComment.length > 0) {
+            this.props.actions.createCommentRequest({
+                postId: Number.parseInt(this.props.match.params.id),
+                id: this.state.commentId,
+                body: this.state.newComment,
+                name: "Ivan Pupkin",
+                email: "pupkin.ivan@gmail.com"
+            });
+            this.setState({commentId: this.state.commentId + 1, newComment: ''})
+        }
     }
 
     render() {
