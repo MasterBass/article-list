@@ -21,7 +21,8 @@ class ArticlePage extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.params.id > 0) {
+        if (this.props.match.params.id > 0 &&
+        this.props.comments.length === 0) {
             this.props.actions.loadCommentsRequst(this.props.match.params.id);
         }
     }

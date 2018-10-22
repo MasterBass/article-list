@@ -7,14 +7,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {loadArticlesRequst} from "./actions/articleActions";
 import {loadUsersRequst} from "./actions/userActions";
+import {PersistGate} from 'redux-persist/integration/react'
 
-const store = configureStore();
+const {store, persistor} = configureStore();
 store.dispatch(loadArticlesRequst());
 store.dispatch(loadUsersRequst());
 
 ReactDOM.render(
     <Provider store={store}>
-        <App/>
+        <PersistGate loading={null} persistor={persistor}>
+            <App/>
+        </PersistGate>
     </Provider>,
     document.getElementById('root')
 );
