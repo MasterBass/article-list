@@ -30,6 +30,7 @@ class ArticlePage extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    const articleId = Number.parseInt(ownProps.match.params.id);
     let article = {
         title: '',
         body: '',
@@ -42,8 +43,11 @@ function mapStateToProps(state, ownProps) {
         phone: '',
         website: ''
     };
+    let comments = [];
+    if(state.comments.length > 0) {
+        comments = state.comments.filter(com => com.postId === articleId);
+    }
     if (state.articles.length > 0) {
-        const articleId = Number.parseInt(ownProps.match.params.id);
         article = state.articles.find(art =>
             art.id === articleId);
         if (state.users.length > 0) {
@@ -53,7 +57,7 @@ function mapStateToProps(state, ownProps) {
     return {
         article: article,
         user: user,
-        comments: state.comments
+        comments: comments
     }
 }
 
